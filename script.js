@@ -6,6 +6,7 @@ const starredTaskBtn = document.getElementById('starred-tasks-btn');
 const saveListBtn = document.getElementById('save-list-btn');
 const newListBtn = document.getElementById('new-list-btn');
 
+
 //add task event listener
 addTaskBtn.addEventListener('click', addTask);
 
@@ -17,7 +18,7 @@ function addTask() {
     const taskText = taskInput.value.trim();
     if(taskText !== '') {
         const taskItem = createTaskItem(taskText);
-        taskInput.appendChild(taskItem);
+        taskList.appendChild(taskItem);
         taskInput.value = '';
     }
 }
@@ -111,3 +112,4 @@ function createNewList() {
     taskList.innerHTML = '';
     localStorage.removeItem('todoList');
 }
+
