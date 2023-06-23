@@ -1,0 +1,114 @@
+// let not = 0;
+
+// function addTask()
+// {
+//     //alert("Hello world");
+//     let task = prompt("Enter the task to do", "Always smile");
+//     //document.write(task);
+//     let ele = document.getElementById("container");
+//     //ele.innerHTML = task;
+//     let child = document.createElement("div");
+//     ele.appendChild(child);
+//     ++not;
+//     child.id = `c${id}`;
+//     child.className = "task";
+//     createTaskNode(child, task);
+//     let b = document.getElementById(box);
+
+// }
+
+
+// function createTaskNode(ele, task)
+// {
+//     let text = document.createElement("p");
+//     let remove = document.createElement("button");
+    
+
+//     text.innerHTML = task;
+//     text.className = "text";
+    
+//     remove.textContent = "Remove";
+//     remove.className = "remove";
+//     //remove.addEventListener("click", removeTask);
+
+//     ele.appendChild(text);
+//     ele.appendChild(remove);
+
+// }
+
+// function removeTask()
+// {
+//     let tid = this.parentNode.id;
+//     let ele = document.getElementById(tid);
+//     ele.parentNode.removeChild(ele);
+// }
+
+/* html
+{
+    scroll-behavior: smooth;
+}
+
+:root {
+    --btn-color: rgb(66, 66, 162);
+  }
+
+.but
+{
+    background-color: var(--btn-color);
+    color: white;
+    border: 1px solid var(--btn-color);
+    border-radius: 6px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    padding: 5px 5px;
+    width: 150px;
+    height: 50px;
+    box-sizing: border-box;
+}
+
+#box
+{
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    flex-direction: column;
+    margin: 20px;
+}
+
+#container
+{
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    flex-direction: column;
+    margin: 20px;
+}
+.task
+{
+    width: 100vw;
+    border: 1px solid black;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    display: flex;
+    height: 50px;
+
+}
+
+#container .task .text
+{
+    margin:auto;
+    width: 66%;
+}
+
+#container .task .remove
+{
+    background-color: var(--btn-color);
+    color: white;
+    border: 1px solid var(--btn-color);
+    border-radius: 6px;
+    padding: 5px 5px;
+    float: right;
+    margin: 5px;
+}
+
+ */
+
+
