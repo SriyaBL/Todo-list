@@ -2,7 +2,7 @@
 const taskInput = document.getElementById('task-input');
 //const addTaskBtn = document.getElementById('add-task-btn');
 const taskList = document.getElementById('task-list');
-const saveListBtn = document.getElementById('save-list-btn');
+// const saveListBtn = document.getElementById('save-list-btn');
 const newListBtn = document.getElementById('new-list-btn');
 const listSelect = document.getElementById('list-select');
 const deleteListBtn = document.getElementById('delete-list-btn');
@@ -123,7 +123,7 @@ function saveList() {
 // }
 
 // Save list button click event listener
-saveListBtn.addEventListener('click', saveList);
+//saveListBtn.addEventListener('click', saveList);
 
 // New list button click event listener
 newListBtn.addEventListener('click', createNewList);
