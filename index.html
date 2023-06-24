@@ -8,21 +8,32 @@
     <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
     <title>Todo list</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
 </head>
 
 <body>
     <div class="container">
         <h1>My Todo List</h1>
+
         <div class="add-task">
             <input type="text" id="task-input" placeholder="Write your next task here...">
-            <button id="add-task-btn">Add</button>
+            <!-- <button id="add-task-btn">Add</button> -->
         </div>
-        <ul id="task-list"></ul>
+        <div class="list-selector">
+            <select id="list-select">
+                
+            </select>
+        </div>
+
         <div class="buttons">
-            <button id="starred-tasks-btn">Starred tasks</button>
+            <button id="toggle-theme-btn"><i class="fas fa-sun"></i></button>
             <button id="save-list-btn">Save List</button>
+            <button id="delete-list-btn">Delete List</button>
             <button id="new-list-btn">Create New List</button>
         </div>
+        <ul id="task-list"></ul>
+
     </div>
 
     <script src="script.js"></script>
