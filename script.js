@@ -2,7 +2,7 @@
 const taskInput = document.getElementById('task-input');
 //const addTaskBtn = document.getElementById('add-task-btn');
 const taskList = document.getElementById('task-list');
-// const saveListBtn = document.getElementById('save-list-btn');
+const saveListBtn = document.getElementById('save-list-btn');
 const newListBtn = document.getElementById('new-list-btn');
 const listSelect = document.getElementById('list-select');
 const deleteListBtn = document.getElementById('delete-list-btn');
@@ -14,9 +14,9 @@ const deleteListBtn = document.getElementById('delete-list-btn');
 //document.addEventListener('DOMContentLoaded', loadTasks);
 
 taskInput.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter') {
-      addTask();
-    }
+  if (event.key === 'Enter') {
+    addTask();
+  }
 });
 
 // Add task function
@@ -68,14 +68,21 @@ function removeTask(event) {
 function moveTaskToTop(event) {
   const starButton = event.target;
   const taskItem = starButton.closest('li');
-  if (taskItem.classList.contains('starred')) {
-    taskItem.classList.remove('starred');
-    taskList.append(taskItem);
-    
-  } else {
-    taskItem.classList.add('starred');
+  console.log(taskItem.classList);
+  const hasStarredClass = taskItem.classList.contains('starred');
+  console.log(hasStarredClass);
+
+  taskItem.classList.toggle('starred');
+
+  console.log(taskItem.classList.contains('starred'));
+
+  if (!hasStarredClass) {
     taskList.insertBefore(taskItem, taskList.firstChild);
+  } else {
+    taskList.append(taskItem);
   }
+
+
 }
 
 // Save list function
@@ -86,24 +93,35 @@ function saveList() {
     isStarred: taskItem.classList.contains('starred'),
   }));
 
+  if(!tasks.length)
+    return;
+
+  //console.log(tasks);
+
   let todoList = JSON.parse(localStorage.getItem('todoList')) || [];
 
   const selectedIndex = listSelect.value;
-  if (selectedIndex >= 0 && selectedIndex < todoList.length) {
+  if (selectedIndex && selectedIndex >= 0 && selectedIndex < todoList.length) {
     // Update the existing list
     todoList[selectedIndex] = tasks;
-  } else {
+  } else{
     // Create a new list
     todoList.push(tasks);
   }
 
   localStorage.setItem('todoList', JSON.stringify(todoList));
 
-  if(listSelect.value == '')
-  {
-    loadListSelector();
-    listSelect.value = 0;
+  if (!listSelect.value) {
+    if (todoList.length == 1) {
+      loadListSelector();
+      listSelect.value = 0;
+    }
+    else {
+      loadListSelector();
+      listSelect.value = todoList.length - 1;
+    }
   }
+
 }
 
 // Load tasks from local storage
@@ -123,7 +141,7 @@ function saveList() {
 // }
 
 // Save list button click event listener
-//saveListBtn.addEventListener('click', saveList);
+saveListBtn.addEventListener('click', saveList);
 
 // New list button click event listener
 newListBtn.addEventListener('click', createNewList);
@@ -174,14 +192,17 @@ function handleListSelectChange() {
   if (selectedListIndex >= 0 && selectedListIndex < todoList.length) {
     const selectedList = todoList[selectedListIndex];
     taskList.innerHTML = '';
-    selectedList.forEach((task) => {
-      const taskItem = createTaskItem(task.text);
-      taskItem.querySelector('input').value = task.dueDate;
-      if (task.isStarred) {
-        moveTaskToTop({ target: taskItem.querySelector('button') });
-      }
-      taskList.appendChild(taskItem);
-    });
+    if (selectedList && selectedList.length) {
+      selectedList.forEach((task) => {
+        const taskItem = createTaskItem(task.text);
+        taskItem.querySelector('input').value = task.dueDate;
+        //console.log(task.isStarred);
+        if (task.isStarred === true) {
+          moveTaskToTop({ target: taskItem.querySelector('button') });
+        }
+        taskList.appendChild(taskItem);
+      });
+    }
   }
 }
 
@@ -191,10 +212,12 @@ const body = document.body;
 toggleThemeBtn.addEventListener('click', toggleTheme);
 
 function toggleTheme() {
-    body.classList.toggle('dark-theme');
+  body.classList.toggle('dark-theme');
 
-    const isDarkTheme = body.classList.contains('dark-theme');
-    toggleThemeBtn.innerHTML = isDarkTheme ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+  const isDarkTheme = body.classList.contains('dark-theme');
+  toggleThemeBtn.innerHTML = isDarkTheme ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
 }
 
 loadListSelector();
+
+document.addEventListener('beforeunload', saveList);
