@@ -30,6 +30,7 @@ function createTaskItem(taskText) {
 
   const taskTextSpan = document.createElement('span');
   taskTextSpan.textContent = taskText;
+  taskTextSpan.addEventListener('click', startTaskEditing);
   taskItem.appendChild(taskTextSpan);
 
   const dueDateInput = document.createElement('input');
@@ -46,6 +47,13 @@ function createTaskItem(taskText) {
     saveList();
   });
   taskItem.appendChild(dueDateInput);
+
+  const doneButton = document.createElement('button');
+  doneButton.innerHTML = '<i class="fas fa-check"></i>'; // Tick mark symbol
+  doneButton.classList.add('done-button');
+  doneButton.addEventListener('click', markTaskAsDone);
+  taskItem.appendChild(doneButton);
+  doneButton.title = 'Done';
 
   const starButton = document.createElement('button');
   starButton.innerHTML = '<i class="far fa-star"></i>'; // Star symbol
@@ -93,12 +101,22 @@ function moveTaskToTop(event) {
 
 }
 
+function markTaskAsDone(event) {
+  const doneButton = event.target;
+  const taskItem = doneButton.closest('li');
+
+  taskItem.classList.toggle('done');
+
+  saveList();
+}
+
 // Save list function
 function saveList() {
   const tasks = Array.from(taskList.children).map((taskItem) => ({
     text: taskItem.firstChild.textContent,
     dueDate: taskItem.querySelector('input').value,
     isStarred: taskItem.classList.contains('starred'),
+    isDone: taskItem.classList.contains('done')
   }));
 
   if (!tasks.length)
@@ -194,6 +212,9 @@ function handleListSelectChange() {
           //moveTaskToTop({ target: taskItem.querySelector('button') });
           taskItem.classList.add('starred');
         }
+        if (task.isDone === true) {
+          taskItem.classList.add('done');
+        }
 
         if (task.dueDate) {
           const selectedDate = new Date(task.dueDate);
@@ -221,3 +242,28 @@ function toggleTheme() {
 loadListSelector();
 
 document.addEventListener('beforeunload', saveList);
+
+function startTaskEditing(event) {
+  const taskTextSpan = event.target;
+  const taskItem = taskTextSpan.closest('li');
+
+  const taskInput = document.createElement('input');
+  taskInput.type = 'text';
+  taskInput.value = taskTextSpan.textContent;
+  taskInput.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      endTaskEditing(taskInput, taskTextSpan);
+    }
+  });
+
+  taskItem.replaceChild(taskInput, taskTextSpan);
+  taskInput.focus();
+}
+
+function endTaskEditing(taskInput, taskTextSpan) {
+  const taskItem = taskInput.closest('li');
+  taskTextSpan.textContent = taskInput.value;
+  taskItem.replaceChild(taskTextSpan, taskInput);
+
+  saveList();
+}
