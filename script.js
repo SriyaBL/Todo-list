@@ -1,6 +1,5 @@
 // Retrieve necessary elements from the DOM
 const taskInput = document.getElementById('task-input');
-//const addTaskBtn = document.getElementById('add-task-btn');
 const taskList = document.getElementById('task-list');
 const saveListBtn = document.getElementById('save-list-btn');
 const newListBtn = document.getElementById('new-list-btn');
@@ -122,8 +121,6 @@ function saveList() {
   if (!tasks.length)
     return;
 
-  //console.log(tasks);
-
   let todoList = JSON.parse(localStorage.getItem('todoList')) || [];
 
   const selectedIndex = listSelect.value;
@@ -207,7 +204,6 @@ function handleListSelectChange() {
       selectedList.forEach((task) => {
         const taskItem = createTaskItem(task.text);
         taskItem.querySelector('input').value = task.dueDate;
-        //console.log(task.isStarred);
         if (task.isStarred === true) {
           //moveTaskToTop({ target: taskItem.querySelector('button') });
           taskItem.classList.add('starred');
@@ -255,6 +251,7 @@ function startTaskEditing(event) {
       endTaskEditing(taskInput, taskTextSpan);
     }
   });
+
 
   taskItem.replaceChild(taskInput, taskTextSpan);
   taskInput.focus();

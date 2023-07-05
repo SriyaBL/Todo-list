@@ -15,8 +15,6 @@ li input[type="text"] {
 
 .container {
   max-width: 800px;
-  min-width: 800px;
-  /* width: 100%; */
   margin: 20px auto;
   padding: 20px;
   background-color: #f5f5f5;
@@ -63,10 +61,6 @@ li {
   justify-content: space-between;
   align-items: center;
 }
-
-/* li button {
-    background-color: #f44336;
-} */
 
 .buttons {
   margin-top: 20px;
