@@ -30,6 +30,7 @@ function createTaskItem(taskText) {
   const taskTextSpan = document.createElement('span');
   taskTextSpan.textContent = taskText;
   taskTextSpan.addEventListener('click', startTaskEditing);
+  taskTextSpan.title = "Click to edit task";
   taskItem.appendChild(taskTextSpan);
 
   const dueDateInput = document.createElement('input');
