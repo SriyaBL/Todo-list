@@ -7,12 +7,6 @@ const newListBtn = document.getElementById('new-list-btn');
 const listSelect = document.getElementById('list-select');
 const deleteListBtn = document.getElementById('delete-list-btn');
 
-// Add task event listener
-//addTaskBtn.addEventListener('click', addTask);
-
-// Load saved tasks from local storage on page load
-//document.addEventListener('DOMContentLoaded', loadTasks);
-
 taskInput.addEventListener('keydown', (event) => {
   if (event.key === 'Enter') {
     addTask();
@@ -138,21 +132,6 @@ function saveList() {
 
 }
 
-// Load tasks from local storage
-// function loadTasks() {
-// //   let todoList = JSON.parse(localStorage.getItem('todoList'));
-// //   if (todoList && todoList.length > 0) {
-// //     const savedTasks = todoList[todoList.length - 1];
-// //     savedTasks.forEach((task) => {
-// //       const taskItem = createTaskItem(task.text);
-// //       taskItem.querySelector('input').value = task.dueDate;
-// //       if (task.isStarred) {
-// //         moveTaskToTop({ target: taskItem.querySelector('.star-button') });
-// //       }
-// //       taskList.appendChild(taskItem);
-// //     });
-// //   }
-// }
 
 // Save list button click event listener
 saveListBtn.addEventListener('click', saveList);
