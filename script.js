@@ -40,6 +40,17 @@ function createTaskItem(taskText) {
 
   const dueDateInput = document.createElement('input');
   dueDateInput.type = 'date';
+  dueDateInput.title = "No due date";
+  dueDateInput.addEventListener('input', function () {
+    if (dueDateInput.value) {
+      const selectedDate = new Date(dueDateInput.value);
+      const formattedDate = selectedDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+      dueDateInput.title = formattedDate;
+    } else {
+      dueDateInput.title = 'No due date';
+    }
+    saveList();
+  });
   taskItem.appendChild(dueDateInput);
 
   const starButton = document.createElement('button');
@@ -96,7 +107,7 @@ function saveList() {
     isStarred: taskItem.classList.contains('starred'),
   }));
 
-  if(!tasks.length)
+  if (!tasks.length)
     return;
 
   //console.log(tasks);
@@ -107,7 +118,7 @@ function saveList() {
   if (selectedIndex && selectedIndex >= 0 && selectedIndex < todoList.length) {
     // Update the existing list
     todoList[selectedIndex] = tasks;
-  } else{
+  } else {
     // Create a new list
     todoList.push(tasks);
   }
@@ -203,6 +214,12 @@ function handleListSelectChange() {
         if (task.isStarred === true) {
           //moveTaskToTop({ target: taskItem.querySelector('button') });
           taskItem.classList.add('starred');
+        }
+
+        if (task.dueDate) {
+          const selectedDate = new Date(task.dueDate);
+          const formattedDate = selectedDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+          taskItem.querySelector('input').title = formattedDate;
         }
         taskList.appendChild(taskItem);
       });
