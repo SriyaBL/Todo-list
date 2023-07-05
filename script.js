@@ -47,12 +47,14 @@ function createTaskItem(taskText) {
   starButton.classList.add('star-button');
   starButton.addEventListener('click', moveTaskToTop);
   taskItem.appendChild(starButton);
+  starButton.title = 'Star';
 
   const removeButton = document.createElement('button');
   removeButton.innerHTML = '<i class="fas fa-times"></i>'; // Cross mark symbol
   removeButton.classList.add('remove-button');
   removeButton.addEventListener('click', removeTask);
   taskItem.appendChild(removeButton);
+  removeButton.title = 'Remove';
 
   return taskItem;
 }
@@ -82,6 +84,7 @@ function moveTaskToTop(event) {
     taskList.append(taskItem);
   }
 
+  saveList();
 
 }
 
@@ -198,7 +201,8 @@ function handleListSelectChange() {
         taskItem.querySelector('input').value = task.dueDate;
         //console.log(task.isStarred);
         if (task.isStarred === true) {
-          moveTaskToTop({ target: taskItem.querySelector('button') });
+          //moveTaskToTop({ target: taskItem.querySelector('button') });
+          taskItem.classList.add('starred');
         }
         taskList.appendChild(taskItem);
       });
