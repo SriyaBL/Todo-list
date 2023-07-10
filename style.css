@@ -163,7 +163,7 @@ body.dark-theme {
     color: white;
 }
 .done-button {
-  color: lightgreen;
+  color: black;
   background-color: transparent;
   border: none;
   cursor: pointer;
