@@ -31,18 +31,18 @@ function handleListSelectChange() {
                     taskItem.classList.add('done');
                 }
 
-                // if (task.dueDate) {
-                //     const selectedDate = new Date(task.dueDate);
-                //     const formattedDate = selectedDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-                //     taskItem.querySelector('input').title = formattedDate;
-                // }
-
                 if (task.dueDate) {
                     const selectedDate = new Date(task.dueDate);
                     const formattedDate = selectedDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-                    const dueDateButton = taskItem.querySelector('button');
-                    dueDateButton.textContent = formattedDate;
+                    taskItem.querySelector('input').title = formattedDate;
                 }
+
+                // if (task.dueDate) {
+                //     const selectedDate = new Date(task.dueDate);
+                //     const formattedDate = selectedDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+                //     const dueDateButton = taskItem.querySelector('button');
+                //     dueDateButton.textContent = formattedDate;
+                // }
 
                 taskList.appendChild(taskItem);
             });
