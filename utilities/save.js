@@ -4,7 +4,7 @@ import { loadListSelector } from "./selector.js";
 export default function saveList() {
     const tasks = Array.from(taskList.children).map((taskItem) => ({
       text: taskItem.firstChild.textContent,
-      dueDate: taskItem.querySelector('input').value,
+      dueDate: taskItem.querySelector('input[type="date"]').value,
       isStarred: taskItem.classList.contains('starred'),
       isDone: taskItem.classList.contains('done')
     }));

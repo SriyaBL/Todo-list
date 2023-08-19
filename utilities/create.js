@@ -16,6 +16,31 @@ export function addTask() {
     saveList();
 }
 
+function showDatePicker(event) {
+    const dueDateButton = event.target;
+    const datePicker = dueDateButton.nextSibling;
+    datePicker.style.display = 'inline-block';
+    dueDateButton.style.display = 'none';
+
+    datePicker.focus();
+}
+
+function handleDatePickerInput(event) {
+    const datePicker = event.target;
+    const dueDateButton = datePicker.parentNode.querySelector('.due-date-button');
+    if (datePicker.value) {
+        const selectedDate = new Date(datePicker.value);
+        const formattedDate = selectedDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+        dueDateButton.textContent = formattedDate;
+    } else {
+        dueDateButton.textContent = 'No due date';
+    }
+    saveList();
+    datePicker.style.display = 'none'; // Hide the date picker after selection
+    dueDateButton.style.display = 'inline-block';
+}
+
+
 export function createTaskItem(taskText) {
     const taskItem = document.createElement('li');
 
@@ -25,20 +50,33 @@ export function createTaskItem(taskText) {
     taskTextSpan.title = "Click to edit task";
     taskItem.appendChild(taskTextSpan);
 
-    const dueDateInput = document.createElement('input');
-    dueDateInput.type = 'date';
-    dueDateInput.title = "No due date";
-    dueDateInput.addEventListener('input', function () {
-        if (dueDateInput.value) {
-            const selectedDate = new Date(dueDateInput.value);
-            const formattedDate = selectedDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-            dueDateInput.title = formattedDate;
-        } else {
-            dueDateInput.title = 'No due date';
-        }
-        saveList();
-    });
-    taskItem.appendChild(dueDateInput);
+    // const dueDateInput = document.createElement('input');
+    // dueDateInput.type = 'date';
+    // dueDateInput.title = "No due date";
+    // dueDateInput.addEventListener('input', function () {
+    //     if (dueDateInput.value) {
+    //         const selectedDate = new Date(dueDateInput.value);
+    //         const formattedDate = selectedDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    //         dueDateInput.title = formattedDate;
+    //     } else {
+    //         dueDateInput.title = 'No due date';
+    //     }
+    //     saveList();
+    // });
+    // taskItem.appendChild(dueDateInput);
+
+    const dueDateButton = document.createElement('button');
+    dueDateButton.textContent = "No due date";
+    dueDateButton.classList.add('due-date-button');
+    dueDateButton.addEventListener('click', showDatePicker);
+    taskItem.appendChild(dueDateButton);
+
+    const datePicker = document.createElement('input');
+    datePicker.type = 'date';
+    datePicker.style.display = 'none'; // Initially hide the date picker
+    datePicker.addEventListener('input', handleDatePickerInput);
+    taskItem.appendChild(datePicker);
+
 
     const doneButton = document.createElement('button');
     doneButton.innerHTML = '<i class="fas fa-check"></i>'; // Tick mark symbol
