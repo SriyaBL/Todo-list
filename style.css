@@ -177,8 +177,9 @@ li:not(.done) .done-button:hover {
   color: lightgreen;
 }
 
-.due-date-button {
+li .due-date-button {
   background-color: #fff;
   color:#333;
   margin-left:auto;
+  width: 100px;
 }
