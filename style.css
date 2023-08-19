@@ -75,7 +75,7 @@ li {
 li input[type="date"] {
   min-width: 100px;
   max-width: 100px;
-  margin-left: auto;
+  /* margin-left: auto; */
 }
 
 .star-button,
@@ -175,4 +175,10 @@ body.dark-theme {
 
 li:not(.done) .done-button:hover {
   color: lightgreen;
+}
+
+.due-date-button {
+  background-color: #fff;
+  color:#333;
+  margin-left:auto;
 }
