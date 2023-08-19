@@ -75,7 +75,7 @@ li {
 li input[type="date"] {
   min-width: 100px;
   max-width: 100px;
-  /* margin-left: auto; */
+  margin-left: auto;
 }
 
 .star-button,
